@@ -1,36 +1,42 @@
 #!/usr/bin/python3
-import math
-
-
-class MagicClass:
-    """_summary_
-    """
-    def __init__(self, radius=0):
-        """_summary_
-
-        Args:
-            radius (int, optional): _description_. Defaults to 0.
-
-        Raises:
-            TypeError: _description_
-        """
-        self.__radius = 0
-        if type(radius) is not int and type(radius) is not float:
-            raise TypeError('radius must be a number')
-        self.__radius = radius
+class Square:
+    """Defines a square"""
+    def __init__(self, size=0):
+        """Initialises the data"""
+        self.size = size
 
     def area(self):
-        """_summary_
+        """Returns current square area"""
+        return self.__size**2
 
-        Returns:
-            _type_: _description_
-        """
-        return ((self.__radius ** 2) * math.pi)
+    @property
+    def size(self):
+        """Getter method"""
+        return self.__size
 
-    def circumference(self):
-        """_summary_
+    @size.setter
+    def size(self, value):
+        """Setter method"""
+        self.__size = value
+        if type(value) != int:
+            raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
 
-        Returns:
-            _type_: _description_
-        """
-        return (2 * math.pi * self.__radius)
+    def __lt__(self, other):
+        return self.area() < other.area()
+
+    def __le__(self, other):
+        return self.area() <= other.area()
+
+    def __eq__(self, other):
+        return self.area() == other.area()
+
+    def __ne__(self, other):
+        return self.area() != other.area()
+
+    def __gt__(self, other):
+        return self.area() > other.area()
+
+    def __ge__(self, other):
+        return self.area() >= other.area()
